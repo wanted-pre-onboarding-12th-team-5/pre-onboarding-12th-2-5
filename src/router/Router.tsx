@@ -8,7 +8,6 @@ interface IRouter {
   element: React.ReactNode;
   errorElement?: React.ReactNode;
   children?: IRouter[];
-  loader?: (() => any) | (({ params }: any) => any);
 }
 
 const routerData: IRouter[] = [
