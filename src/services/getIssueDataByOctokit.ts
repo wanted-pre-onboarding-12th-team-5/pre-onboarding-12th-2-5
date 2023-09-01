@@ -39,6 +39,7 @@ export const getIssuesList = async (page?: number) => {
     if (!currentLocation.includes('?status')) {
       window.location.href = HttpStatusAppendedUrl;
     }
+    return { data: [] };
   }
 };
 

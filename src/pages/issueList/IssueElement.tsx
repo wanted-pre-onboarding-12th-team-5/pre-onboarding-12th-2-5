@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { IssueType } from 'types/issue';
 
 interface Props {
