@@ -18,11 +18,11 @@ export function useIntersect(onIntersectCallback: () => void) {
 
   useEffect(() => {
     let observer: IntersectionObserver;
-    if (target && target.current) {
+    if (target?.current) {
       observer = new IntersectionObserver(onIntersect, { threshold: 0.9 });
       observer.observe(target.current);
     }
-    return () => observer && observer.disconnect();
+    return () => observer?.disconnect();
   }, [target, onIntersect]);
 
   return target;
