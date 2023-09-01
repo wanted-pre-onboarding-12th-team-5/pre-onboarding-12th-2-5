@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import { getIssuesList, issueListResponse } from 'services/getIssueDataByOctokit';
@@ -7,23 +7,37 @@ import AdvertiseElement from './AdvertiseElement';
 import IssueElement from './IssueElement';
 import { useIntersect } from 'hooks/useIntersect';
 import CustomSuspense from 'components/common/Suspense/CustomSuspense';
+import { BeatLoader } from 'react-spinners';
 
 const IssueList = () => {
   const response = useLoaderData() as issueListResponse;
   const [issueList, setIssueList] = useState<IssueType[]>([...response.data]);
   const [page, setPage] = useState(1);
   const intersectionObserverTarget = useIntersect(handleGetMoreIssues);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   async function handleGetMoreIssues() {
-    await getIssuesList(page + 1).then(response => {
-      setIssueList([...issueList, ...response.data]);
-      setPage(page + 1);
-    });
+    setIsLoading(true);
+    try {
+      await getIssuesList(page + 1).then(response => {
+        setIssueList([...issueList, ...response.data]);
+        setPage(page + 1);
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
-    <CustomSuspense fallback={<p>Loading Test</p>} maxDuration={2000}>
-      <ul>
+    <ul>
+      <CustomSuspense
+        fallback={<BeatLoader color="#0059cd" className="loadingBar" />}
+        maxDuration={500}
+      >
         {issueList.map((issue, index) =>
           index % 5 === 0 && index !== 0 ? (
             <Fragment key={issue.number}>
@@ -34,10 +48,12 @@ const IssueList = () => {
             <IssueElement key={issue.number} issue={issue} />
           ),
         )}
-        {issueList.length > 0 && <div style={{ height: 100 }} ref={intersectionObserverTarget} />}
-        {/* TODO: 스타일 적용 시에 div style: height 100px 적용 */}
-      </ul>
-    </CustomSuspense>
+        {isLoading && <BeatLoader color="#0059cd" className="loadingBar" />}
+      </CustomSuspense>
+      {issueList.length > 0 && !isLoading && (
+        <div style={{ height: 100 }} ref={intersectionObserverTarget} />
+      )}
+    </ul>
   );
 };
 
