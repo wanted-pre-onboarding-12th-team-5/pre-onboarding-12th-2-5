@@ -10,8 +10,9 @@ export default function Layout({ children }: Props) {
 }
 
 const StyledLayout = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
+  margin: 0 auto;
   flex-direction: column;
 
   ul {
