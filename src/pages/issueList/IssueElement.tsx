@@ -6,6 +6,7 @@ interface Props {
   issue: IssueType;
 }
 
+
 const IssueElement = ({ issue }: Props) => {
   return (
     <StyledIssueElement>
@@ -35,6 +36,7 @@ export default IssueElement;
 
 const StyledIssueElement = styled.li`
   padding: 0.75rem;
+  width: 100%;
   border-bottom: 1px solid #999;
 
   section {
