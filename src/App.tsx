@@ -1,16 +1,15 @@
-import React from 'react';
-import './App.css';
+import Header from './components/common/Header/Header';
+import { Outlet } from 'react-router-dom';
+import Layout from './components/common/Layout/Layout';
 
 import IssueDetail from './components/IssueDetail';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>hi</p>
-        <IssueDetail />
-      </header>
-    </div>
+    <Layout>
+      <Header />
+      <Outlet />
+    </Layout>
   );
 }
 

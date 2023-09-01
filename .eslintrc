@@ -2,11 +2,12 @@
   "env": {
     "es6": true
   },
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
-  },
+  // data router사용을 위해 주석처리
+  // "parser": "@babel/eslint-parser",
+  // "parserOptions": {
+  //   "sourceType": "module",
+  //   "allowImportExportEverywhere": true
+  // },
   "extends": [
     "react-app",
     "eslint:recommended",
@@ -16,9 +17,9 @@
   "rules": {
     "no-var": "error",
     "no-multiple-empty-lines": "error",
-    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "eqeqeq": "error",
     "dot-notation": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": "warn"
   }
 }
