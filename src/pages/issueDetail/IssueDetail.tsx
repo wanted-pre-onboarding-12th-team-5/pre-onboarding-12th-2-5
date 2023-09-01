@@ -7,6 +7,7 @@ import Prism from 'prismjs';
 import IssueElement from '../issueList/IssueElement';
 import { BeatLoader } from 'react-spinners';
 import CustomSuspense from '../../components/common/Suspense/CustomSuspense';
+import styled from 'styled-components';
 
 const IssueDetail = () => {
   const response = useLoaderData() as issueDetailResponse;
@@ -17,19 +18,41 @@ const IssueDetail = () => {
   }, [issueDetail]);
 
   return (
-    <CustomSuspense
+          <CustomSuspense
       fallback={<BeatLoader color="#0059cd" className="loadingBar" />}
       maxDuration={500}
     >
-      <div className="IssueDetail" style={{ border: '4px solid black', padding: '5%' }}>
-        <div style={{ display: 'flex' }}>
-          <img src={issueDetail?.user?.avatar_url || ''} alt="user avatar" />
-          <IssueElement issue={issueDetail} />
-        </div>
+    <div className="IssueDetail">
+      <StyledDetail>
+        <img className='detail-user-url' src={issueDetail?.user?.avatar_url || ''} alt="user avatar" />
+        <IssueElement issue={issueDetail} />
+      </StyledDetail>
+      <StyledMarkDown>
         <ReactMarkdown>{issueDetail?.body || ''}</ReactMarkdown>
-      </div>
-    </CustomSuspense>
+      </StyledMarkDown>
+    </div>
+        </CustomSuspense>
   );
 };
 
 export default IssueDetail;
+
+const StyledDetail = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .detail-user-url {
+    width: 4rem;
+    height: 4rem;
+    border-bottom: 1px solid #999;
+    border-radius: 100%;
+  }
+`;
+
+const StyledMarkDown = styled.div`
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  border: 1px solid #999;
+  border-radius: 1rem;
+`;

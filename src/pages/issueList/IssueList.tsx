@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-
+import styled from 'styled-components';
 import { getIssuesList, issueListResponse } from 'services/getIssueDataByOctokit';
 import { IssueType } from 'types/issue';
 import AdvertiseElement from './AdvertiseElement';
@@ -48,13 +48,19 @@ const IssueList = () => {
             <IssueElement key={issue.number} issue={issue} />
           ),
         )}
+
         {isLoading && <BeatLoader color="#0059cd" className="loadingBar" />}
       </CustomSuspense>
       {issueList.length > 0 && !isLoading && (
         <div style={{ height: 100 }} ref={intersectionObserverTarget} />
       )}
     </ul>
+
   );
 };
 
 export default IssueList;
+
+const StyledScroll = styled.div`
+  height: 100px;
+`;
