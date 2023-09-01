@@ -1,4 +1,6 @@
 import { Suspense } from 'react';
+import styled from 'styled-components';
+import { BsGithub } from 'react-icons/bs';
 
 const ErrorBoundary = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -20,11 +22,12 @@ const ErrorBoundary = () => {
     errorStatusList
       .filter(errorObj => errorObj.statusCode === parseInt(status))
       .map(targetObj => (
-        <div key={targetObj.statusCode}>
+        <StyledError key={targetObj.statusCode}>
+          <BsGithub className='status-icon' />
           <h1>Status Code : {targetObj.statusCode}</h1>
 
-          <p>{targetObj.description}</p>
-        </div>
+          <p className='status-code'>{targetObj.description}</p>
+        </StyledError>
       ));
 
   return (
@@ -35,3 +38,17 @@ const ErrorBoundary = () => {
 };
 
 export default ErrorBoundary;
+
+const StyledError = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+
+  .status-icon {
+    font-size: 6rem;
+  }
+  .status-code {
+    margin: 0;
+  }
+`;
