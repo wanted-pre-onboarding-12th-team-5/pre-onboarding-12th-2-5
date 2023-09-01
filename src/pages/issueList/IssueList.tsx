@@ -1,10 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { issueListResponse } from '../../services/getIssueDataByOctokit';
+
+import { issueListResponse } from 'services/getIssueDataByOctokit';
+import { IssueType } from 'types/issue';
 import AdvertiseElement from './AdvertiseElement';
 import IssueElement from './IssueElement';
-import { IssueType } from '../../types/issue';
 
 const IssueList = () => {
   const response = useLoaderData() as issueListResponse;
@@ -16,7 +16,7 @@ const IssueList = () => {
         {issueList.map((issue, index) => (
           //FIXME
           <>
-            <IssueElement />
+            <IssueElement issue={issue} />
             <AdvertiseElement />
           </>
         ))}
