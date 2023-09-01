@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-
+import styled from 'styled-components';
 import { getIssuesList, issueListResponse } from 'services/getIssueDataByOctokit';
 import { IssueType } from 'types/issue';
 import AdvertiseElement from './AdvertiseElement';
@@ -33,11 +33,14 @@ const IssueList = () => {
             <IssueElement key={issue.number} issue={issue} />
           ),
         )}
-        {issueList.length > 0 && <div style={{ height: 100 }} ref={intersectionObserverTarget} />}
-        {/* TODO: 스타일 적용 시에 div style: height 100px 적용 */}
+        {issueList.length > 0 && <StyledScroll ref={intersectionObserverTarget} />}
       </ul>
     </React.Suspense>
   );
 };
 
 export default IssueList;
+
+const StyledScroll = styled.div`
+  height: 100px;
+`;
