@@ -5,6 +5,8 @@ import { issueDetailResponse } from '../../services/getIssueDataByOctokit';
 import './IssueDetail.css';
 import Prism from 'prismjs';
 import IssueElement from '../issueList/IssueElement';
+import { BeatLoader } from 'react-spinners';
+import CustomSuspense from '../../components/common/Suspense/CustomSuspense';
 import styled from 'styled-components';
 
 const IssueDetail = () => {
@@ -16,6 +18,10 @@ const IssueDetail = () => {
   }, [issueDetail]);
 
   return (
+          <CustomSuspense
+      fallback={<BeatLoader color="#0059cd" className="loadingBar" />}
+      maxDuration={500}
+    >
     <div className="IssueDetail">
       <StyledDetail>
         <img className='detail-user-url' src={issueDetail?.user?.avatar_url || ''} alt="user avatar" />
@@ -25,6 +31,7 @@ const IssueDetail = () => {
         <ReactMarkdown>{issueDetail?.body || ''}</ReactMarkdown>
       </StyledMarkDown>
     </div>
+        </CustomSuspense>
   );
 };
 
