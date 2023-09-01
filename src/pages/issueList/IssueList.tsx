@@ -6,6 +6,7 @@ import { IssueType } from 'types/issue';
 import AdvertiseElement from './AdvertiseElement';
 import IssueElement from './IssueElement';
 import { useIntersect } from 'hooks/useIntersect';
+import CustomSuspense from 'components/common/Suspense/CustomSuspense';
 
 const IssueList = () => {
   const response = useLoaderData() as issueListResponse;
@@ -21,7 +22,7 @@ const IssueList = () => {
   }
 
   return (
-    <React.Suspense fallback={<p>Loading Test</p>}>
+    <CustomSuspense fallback={<p>Loading Test</p>} maxDuration={2000}>
       <ul>
         {issueList.map((issue, index) =>
           index % 5 === 0 && index !== 0 ? (
@@ -36,7 +37,7 @@ const IssueList = () => {
         {issueList.length > 0 && <div style={{ height: 100 }} ref={intersectionObserverTarget} />}
         {/* TODO: 스타일 적용 시에 div style: height 100px 적용 */}
       </ul>
-    </React.Suspense>
+    </CustomSuspense>
   );
 };
 
