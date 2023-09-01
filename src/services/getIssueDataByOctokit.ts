@@ -32,6 +32,7 @@ export const get_issues_list = async (page?: number) => {
       ...listOptions,
     });
     return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     //octokit 결과값에 따른 http상태코드 url에 보관
     const currentLocation = window.location.href;
@@ -49,6 +50,7 @@ export const get_issue_detail = async (issueId: number) => {
       ...listOptions,
     });
     return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     const currentLocation = window.location.href;
     const HttpStatusAppendedUrl = currentLocation + `?status=${error.status}`;

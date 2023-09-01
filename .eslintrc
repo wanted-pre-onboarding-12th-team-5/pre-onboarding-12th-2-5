@@ -20,6 +20,7 @@
     "no-console": ["off", { "allow": ["warn", "error", "info"] }],
     "eqeqeq": "error",
     "dot-notation": "error",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
