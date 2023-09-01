@@ -22,7 +22,7 @@ const listOptions = {
   ...commonOptions,
 };
 
-export const get_issues_list = async (page?: number) => {
+export const getIssuesList = async (page?: number) => {
   try {
     //page 파라미터로 넣지 않았을 때의 기본값 설정
     const actualPage = page ?? 1;
@@ -42,7 +42,7 @@ export const get_issues_list = async (page?: number) => {
   }
 };
 
-export const get_issue_detail = async (issueId: number) => {
+export const getIssueDetail = async (issueId: number) => {
   try {
     const response = await octokit.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {
       issue_number: issueId,
