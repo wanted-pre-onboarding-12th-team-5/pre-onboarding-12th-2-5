@@ -1,9 +1,16 @@
+import styled from 'styled-components';
+
 const Header = () => {
   return (
-    <header>
+    <StyledHeader>
       <h1>Facebook / React Issues List</h1>
-    </header>
+    </StyledHeader>
   );
 };
 
 export default Header;
+
+const StyledHeader = styled.header`
+  display: flex;
+  justify-content: center;
+`;
