@@ -17,9 +17,9 @@
   "rules": {
     "no-var": "error",
     "no-multiple-empty-lines": "error",
-    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "no-console": ["off", { "allow": ["warn", "error", "info"] }],
     "eqeqeq": "error",
     "dot-notation": "error",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "off"
   }
 }
