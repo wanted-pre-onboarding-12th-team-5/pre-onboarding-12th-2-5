@@ -23,7 +23,7 @@ const ErrorBoundary = () => {
         <div key={targetObj.statusCode}>
           <h1>Status Code : {targetObj.statusCode}</h1>
 
-          <p>{targetObj['description']}</p>
+          <p>{targetObj.description}</p>
         </div>
       ));
 
