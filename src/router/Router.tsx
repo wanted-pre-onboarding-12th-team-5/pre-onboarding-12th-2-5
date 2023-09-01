@@ -8,7 +8,7 @@ interface IRouter {
   path: string;
   element: React.ReactNode;
   errorElement?: React.ReactNode;
-  loader?: (() => any) | (({ params }: any) => any);
+  loader?: (() => any) | ((props: any) => any);
   children?: IRouter[];
 }
 
@@ -22,7 +22,7 @@ const routerData: IRouter[] = [
       {
         path: '/issue/:id',
         element: <IssueDetail />,
-        loader: async ({ params }) => get_issue_detail(params.id),
+        loader: async props => get_issue_detail(props.params.id),
       },
     ],
   },
