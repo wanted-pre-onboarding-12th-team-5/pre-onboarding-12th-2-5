@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { issueDetailResponse } from '../../services/getIssueDataByOctokit';
 import './IssueDetail.css';
 import Prism from 'prismjs';
+import IssueElement from '../issueList/IssueElement';
 
 const IssueDetail = () => {
   const response = useLoaderData() as issueDetailResponse;
@@ -15,9 +16,10 @@ const IssueDetail = () => {
 
   return (
     <div className="IssueDetail" style={{ border: '4px solid black', padding: '5%' }}>
-      {/* 여기 헤더 투입 */}
-      <img src={issueDetail?.user?.avatar_url || ''} alt="user avatar" />
-      {/* list cell 형태 삽입 */}
+      <div style={{ display: 'flex' }}>
+        <img src={issueDetail?.user?.avatar_url || ''} alt="user avatar" />
+        <IssueElement issue={issueDetail} />
+      </div>
       <ReactMarkdown>{issueDetail?.body || ''}</ReactMarkdown>
     </div>
   );
