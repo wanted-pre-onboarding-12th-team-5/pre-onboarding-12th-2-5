@@ -11,10 +11,18 @@ export default function Layout({ children }: Props) {
 
 const StyledLayout = styled.div`
   width: 100%;
-  height: 100vh;
-
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
 `;
