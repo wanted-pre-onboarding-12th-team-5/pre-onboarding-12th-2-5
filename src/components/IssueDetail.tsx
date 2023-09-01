@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import './IssueDetail.css';
+import Prism from 'prismjs';
 
 import { getIssueDetail } from '../services/IssueDetail';
 
@@ -21,16 +23,16 @@ function IssueDetail() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [issueDetail]);
+
   return (
     <div className="IssueDetail" style={{ border: '4px solid black', margin: '5%' }}>
       {/* 여기 헤더 투입 */}
-      {/* 유저 img */}
+      <img src={issueDetail?.user.avatar_url || ''} alt="user avatar" />
       {/* list cell 형태 삽입 */}
-
-      <div>
-        <p>{issueDetail?.title}</p>
-        <ReactMarkdown>{issueDetail?.body || ''}</ReactMarkdown>
-      </div>
+      <ReactMarkdown>{issueDetail?.body || ''}</ReactMarkdown>
     </div>
   );
 }
