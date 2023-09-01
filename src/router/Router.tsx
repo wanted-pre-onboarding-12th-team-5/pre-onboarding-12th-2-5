@@ -2,7 +2,7 @@ import React from 'react';
 import App from '../App';
 import { createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary, IssueDetail, IssueList } from '../pages';
-import { get_issue_detail, get_issues_list } from '../services/getIssueDataByOctokit';
+import { getIssueDetail, getIssuesList } from '../services/getIssueDataByOctokit';
 
 interface IRouter {
   path: string;
@@ -18,11 +18,11 @@ const routerData: IRouter[] = [
     element: <App />,
     errorElement: <ErrorBoundary />,
     children: [
-      { path: '', element: <IssueList />, loader: async () => get_issues_list() },
+      { path: '', element: <IssueList />, loader: async () => getIssuesList() },
       {
         path: '/issue/:id',
         element: <IssueDetail />,
-        loader: async props => get_issue_detail(props.params.id),
+        loader: async props => getIssueDetail(props.params.id),
       },
     ],
   },

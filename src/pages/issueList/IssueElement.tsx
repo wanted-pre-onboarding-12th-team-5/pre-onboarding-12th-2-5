@@ -1,24 +1,26 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-//FIXME
+import { IssueType } from 'types/issue';
+
 interface Props {
-  // issueData: IssueType;
+  issue: IssueType;
 }
 
-const IssueElement = () => {
+const IssueElement = ({ issue }: Props) => {
   return (
     <li>
-      <Link to={``}>
+      <Link to={`/issue/${issue.number}`}>
         <section>
-          <div className="issue-number">#123</div>
-          <div className="issue-title">타이틀</div>
+          <div className="issue-number">#{issue.number}</div>
+          <div className="issue-title">{issue.title}</div>
         </section>
 
         <section className="issue-info">
-          <div className="issue-author">작성자 : </div>
-          <div className="issue-date">작성일 : </div>
-          <div className="issue-comments"> issue 댓글 </div>
+          <div className="issue-author">작성자 : {issue.user?.login}</div>
+          <div className="issue-date">
+            작성일 : {new Date(issue.created_at).toLocaleDateString()}
+          </div>
+          <div className="issue-comments"> issue 댓글 {issue.comments} </div>
         </section>
       </Link>
     </li>

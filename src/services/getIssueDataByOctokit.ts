@@ -22,17 +22,16 @@ const listOptions = {
   ...commonOptions,
 };
 
-export const get_issues_list = async (page?: number) => {
+export const getIssuesList = async (page?: number) => {
   try {
     //page 파라미터로 넣지 않았을 때의 기본값 설정
-    const actualPage = page !== undefined ? page : 1;
+    const actualPage = page ?? 1;
 
-    const response = octokit.request('GET /repos/{owner}/{repo}/issues', {
+    const response = await octokit.request('GET /repos/{owner}/{repo}/issues', {
       page: actualPage,
       ...listOptions,
     });
     return response;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     //octokit 결과값에 따른 http상태코드 url에 보관
     const currentLocation = window.location.href;
@@ -40,17 +39,17 @@ export const get_issues_list = async (page?: number) => {
     if (!currentLocation.includes('?status')) {
       window.location.href = HttpStatusAppendedUrl;
     }
+    return { data: [] };
   }
 };
 
-export const get_issue_detail = async (issueId: number) => {
+export const getIssueDetail = async (issueId: number) => {
   try {
     const response = await octokit.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {
       issue_number: issueId,
       ...listOptions,
     });
     return response;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     const currentLocation = window.location.href;
     const HttpStatusAppendedUrl = currentLocation + `?status=${error.status}`;
